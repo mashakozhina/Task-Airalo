@@ -1,0 +1,12 @@
+node_modules/
+.env
+*.DS_Store
+
+# Cypress
+cypress-tests/screenshots/
+cypress-tests/videos/
+cypress-tests/mochawesome-report/
+
+# Jest
+api-tests/coverage/
+api-tests/test-results/
