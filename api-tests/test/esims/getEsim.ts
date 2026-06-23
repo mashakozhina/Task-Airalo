@@ -20,10 +20,11 @@ describe('Get eSIM Details', () => {
     }
   })
 
-  it('Should retrieve details for all 6 eSIMs with status 200', () => {
+  it('Should retrieve details for all 6 eSIMs with status 200 and success message', () => {
     expect(esimResponses).toHaveLength(appData.esimQuantity)
     for (const response of esimResponses) {
       expect(response.status).toBe(200)
+      expect(response.body.meta?.message).toBe('success')
     }
   })
 
@@ -31,8 +32,8 @@ describe('Get eSIM Details', () => {
     sims.forEach((sim, i) => {
       const data: EsimData = esimResponses[i].body.data
       expect(data.iccid).toBe(sim.iccid)
-      expect(typeof data.lpa).toBe('string')
-      expect(typeof data.qrcode).toBe('string')
+      expect(data.lpa).toEqual(expect.any(String))
+      expect(data.qrcode).toEqual(expect.any(String))
     })
   })
 
