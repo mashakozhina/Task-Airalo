@@ -4,13 +4,14 @@ import { TOKEN_FILE } from '../../src/globalSetup'
 describe('Authentication', () => {
   const cached = JSON.parse(fs.readFileSync(TOKEN_FILE, 'utf8'))
 
-  it('Should return status 200', () => {
+  it('Should return status 200 and success message', () => {
     expect(cached.status).toBe(200)
+    expect(cached.body.meta?.message).toBe('success')
   })
 
   it('Response contains a valid Bearer access_token', () => {
     expect(cached.body.data.token_type).toBe('Bearer')
-    expect(typeof cached.body.data.access_token).toBe('string')
+    expect(cached.body.data.access_token).toEqual(expect.any(String))
     expect(cached.body.data.access_token.length).toBeGreaterThan(0)
   })
 })
